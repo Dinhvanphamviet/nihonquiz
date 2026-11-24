@@ -1,0 +1,38 @@
+# Node.js / Electron
+node_modules/
+dist/
+out/
+.vite/
+*.tsbuildinfo
+
+# C build outputs
+server/build/
+*.o
+*.obj
+*.exe
+*.dll
+*.so
+*.a
+*.dSYM/
+
+# Runtime data
+server/data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+logs/
+*.log
+
+# Local configuration
+.env
+.env.*
+!.env.example
+
+# Editor settings
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
