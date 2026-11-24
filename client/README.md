@@ -18,24 +18,6 @@ npm run dev
 | `npm run build` | Kiểm tra kiểu và build vào `out/` |
 | `npm start` | Mở bản đã build |
 
-## Kiểm tra code
-
-Chạy trong thư mục `client/`:
-
-```sh
-npm run lint
-npm run build
-```
-
-CI tự động chạy ESLint, TypeScript và build. Prettier dùng thủ công cho từng file khi cần:
-
-```sh
-npm run format -- src/renderer/app/App.tsx
-npm run format:check -- src/renderer/app/App.tsx
-```
-
-Không chạy format toàn bộ project. Component shadcn/ui vẫn được lint; riêng quy tắc Fast Refresh cho phép xuất thêm variants và hooks.
-
 ## Cấu trúc thư mục
 
 ```text

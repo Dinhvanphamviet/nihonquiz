@@ -90,24 +90,6 @@ npm run dev
 
 Khi triển khai kết nối TCP, chạy server trước, sau đó mở client trên các máy trong lớp. Cấu hình client dùng IP LAN và cổng của máy server; nếu chạy cùng máy có thể dùng `127.0.0.1`. Cho phép cổng TCP của server qua firewall và bảo đảm Wi-Fi cho phép các thiết bị liên lạc với nhau.
 
-## CI
-
-GitHub Actions tự động kiểm tra khi push lên mọi nhánh hoặc mở/cập nhật Pull Request vào `main`:
-
-- **Client (Windows):** cài dependency bằng `npm ci`, chạy ESLint, kiểm tra TypeScript và build Electron.
-- **Server (Ubuntu):** biên dịch bằng GCC với `-Wall -Wextra -Werror`; cảnh báo biên dịch cũng làm CI thất bại.
-
-Kiểm tra client trước khi push, từ thư mục `client/`:
-
-```sh
-npm run lint
-npm run build
-```
-
-Dùng `npm run lint:fix` để sửa các lỗi ESLint có thể tự động xử lý. Prettier chỉ dùng thủ công cho từng file, ví dụ `npm run format -- src/renderer/app/App.tsx`; không format hàng loạt hoặc bắt buộc định dạng lại code cũ trong CI.
-
-Workflow nằm tại [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Xem kết quả trong tab **Actions** hoặc phần checks của PR. CI chỉ kiểm tra, không phát hành ứng dụng.
-
 ## Tài liệu
 
 - [Phân công nhiệm vụ](docs/PhanCongNhiemVu.md)
