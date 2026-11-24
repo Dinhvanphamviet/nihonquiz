@@ -10,12 +10,7 @@ export default defineConfig({
   },
   preload: {
     resolve: { alias: { '@shared': resolve('src/shared') } },
-    build: {
-      rollupOptions: {
-        input: resolve('src/preload/index.ts'),
-        output: { format: 'cjs', entryFileNames: 'index.js' },
-      },
-    },
+    build: { rollupOptions: { input: resolve('src/preload/index.ts'), output: { format: 'cjs', entryFileNames: 'index.js' } } },
   },
   renderer: {
     root: resolve('src/renderer'),

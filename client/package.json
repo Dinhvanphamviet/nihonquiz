@@ -14,8 +14,8 @@
     "start": "electron-vite preview",
     "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
-    "format": "prettier --write .",
-    "format:check": "prettier --check ."
+    "format": "prettier --write",
+    "format:check": "prettier --check"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

@@ -94,18 +94,17 @@ Khi triển khai kết nối TCP, chạy server trước, sau đó mở client t
 
 GitHub Actions tự động kiểm tra khi push lên mọi nhánh hoặc mở/cập nhật Pull Request vào `main`:
 
-- **Client (Windows):** cài dependency bằng `npm ci`, chạy ESLint, kiểm tra định dạng bằng Prettier, kiểm tra TypeScript và build Electron.
+- **Client (Windows):** cài dependency bằng `npm ci`, chạy ESLint, kiểm tra TypeScript và build Electron.
 - **Server (Ubuntu):** biên dịch bằng GCC với `-Wall -Wextra -Werror`; cảnh báo biên dịch cũng làm CI thất bại.
 
 Kiểm tra client trước khi push, từ thư mục `client/`:
 
 ```sh
 npm run lint
-npm run format:check
 npm run build
 ```
 
-Dùng `npm run format` để định dạng code và `npm run lint:fix` để sửa các lỗi ESLint có thể tự động xử lý. Prettier áp dụng cho client; file sinh ra và `package-lock.json` được bỏ qua.
+Dùng `npm run lint:fix` để sửa các lỗi ESLint có thể tự động xử lý. Prettier chỉ dùng thủ công cho từng file, ví dụ `npm run format -- src/renderer/app/App.tsx`; không format hàng loạt hoặc bắt buộc định dạng lại code cũ trong CI.
 
 Workflow nằm tại [`.github/workflows/ci.yml`](.github/workflows/ci.yml). Xem kết quả trong tab **Actions** hoặc phần checks của PR. CI chỉ kiểm tra, không phát hành ứng dụng.
 
