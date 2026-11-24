@@ -11,12 +11,27 @@ npm install
 npm run dev
 ```
 
-| Lệnh | Chức năng |
-| --- | --- |
-| `npm run dev` | Mở ứng dụng Electron với Vite và hot reload |
+| Lệnh                | Chức năng                                         |
+| ------------------- | ------------------------------------------------- |
+| `npm run dev`       | Mở ứng dụng Electron với Vite và hot reload       |
 | `npm run typecheck` | Kiểm tra TypeScript của Main, Preload và Renderer |
-| `npm run build` | Kiểm tra kiểu và build vào `out/` |
-| `npm start` | Mở bản đã build |
+| `npm run build`     | Kiểm tra kiểu và build vào `out/`                 |
+| `npm start`         | Mở bản đã build                                   |
+
+## Kiểm tra code
+
+```sh
+npm run lint
+npm run format:check
+npm run build
+```
+
+- `npm run lint`: kiểm tra TypeScript/React bằng ESLint; cảnh báo cũng làm lệnh thất bại.
+- `npm run lint:fix`: tự sửa các lỗi ESLint có thể xử lý.
+- `npm run format:check`: kiểm tra định dạng bằng Prettier.
+- `npm run format`: định dạng mã nguồn, cấu hình và README của client.
+
+CI chạy các bước kiểm tra trên khi push hoặc tạo PR vào `main`. Dùng LF cho xuống dòng để thống nhất giữa Windows và Linux. Component shadcn/ui vẫn được lint; riêng quy tắc Fast Refresh cho phép chúng xuất thêm variants và hooks.
 
 ## Cấu trúc thư mục
 
@@ -49,12 +64,12 @@ src/
 
 ## Phân chia trách nhiệm
 
-| Phần | Trách nhiệm |
-| --- | --- |
-| Main | Quản lý cửa sổ Electron, kết nối TCP, gửi request, nhận phản hồi và sự kiện |
-| Preload | Cung cấp API cụ thể cho giao diện qua `contextBridge` |
-| Renderer | Hiển thị giao diện, nhận thao tác và cập nhật trạng thái màn hình |
-| Shared | Kiểu dữ liệu giao thức, mô hình dữ liệu và tên kênh IPC dùng chung trong client |
+| Phần     | Trách nhiệm                                                                     |
+| -------- | ------------------------------------------------------------------------------- |
+| Main     | Quản lý cửa sổ Electron, kết nối TCP, gửi request, nhận phản hồi và sự kiện     |
+| Preload  | Cung cấp API cụ thể cho giao diện qua `contextBridge`                           |
+| Renderer | Hiển thị giao diện, nhận thao tác và cập nhật trạng thái màn hình               |
+| Shared   | Kiểu dữ liệu giao thức, mô hình dữ liệu và tên kênh IPC dùng chung trong client |
 
 Luồng giao tiếp:
 
@@ -70,15 +85,15 @@ Server C quản lý phiên, kiểm tra quyền, thời hạn làm bài và chấ
 
 Các file được đặt theo trách nhiệm:
 
-| Vị trí | File |
-| --- | --- |
-| `main/` | `index.ts`, `config.ts` |
-| `main/network/` | `tcp-client.ts`, `codec.ts`, `request.ts` |
-| `main/ipc/` | `handlers.ts` |
-| `preload/` | `index.ts` |
-| `renderer/` | `main.tsx` |
-| `renderer/app/` | `App.tsx`, `router.tsx`, `providers.tsx` |
-| `shared/` | `channels.ts`, `desktop.ts`; bổ sung `protocol.ts`, `models.ts` khi triển khai nghiệp vụ |
+| Vị trí          | File                                                                                     |
+| --------------- | ---------------------------------------------------------------------------------------- |
+| `main/`         | `index.ts`, `config.ts`                                                                  |
+| `main/network/` | `tcp-client.ts`, `codec.ts`, `request.ts`                                                |
+| `main/ipc/`     | `handlers.ts`                                                                            |
+| `preload/`      | `index.ts`                                                                               |
+| `renderer/`     | `main.tsx`                                                                               |
+| `renderer/app/` | `App.tsx`, `router.tsx`, `providers.tsx`                                                 |
+| `shared/`       | `channels.ts`, `desktop.ts`; bổ sung `protocol.ts`, `models.ts` khi triển khai nghiệp vụ |
 
 Mỗi chức năng gom các trang, component, API và hooks liên quan vào cùng thư mục. Ví dụ:
 

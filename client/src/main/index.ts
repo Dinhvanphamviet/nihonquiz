@@ -4,11 +4,18 @@ import { registerIpcHandlers } from './ipc/handlers'
 
 async function createWindow(): Promise<void> {
   const window = new BrowserWindow({
-    width: 1180, height: 800, minWidth: 900, minHeight: 650,
-    title: 'NihonQuiz', backgroundColor: '#f7f7f5', show: false,
+    width: 1180,
+    height: 800,
+    minWidth: 900,
+    minHeight: 650,
+    title: 'NihonQuiz',
+    backgroundColor: '#f7f7f5',
+    show: false,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      contextIsolation: true, nodeIntegration: false, sandbox: true,
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true,
     },
   })
   window.once('ready-to-show', () => window.show())
@@ -21,19 +28,22 @@ async function createWindow(): Promise<void> {
   }
 }
 
-app.whenReady().then(async () => {
-  Menu.setApplicationMenu(null)
-  registerIpcHandlers()
-  await createWindow()
-  app.on('activate', () => {
-    if (BrowserWindow.getAllWindows().length === 0) {
-      void createWindow().catch(console.error)
-    }
+app
+  .whenReady()
+  .then(async () => {
+    Menu.setApplicationMenu(null)
+    registerIpcHandlers()
+    await createWindow()
+    app.on('activate', () => {
+      if (BrowserWindow.getAllWindows().length === 0) {
+        void createWindow().catch(console.error)
+      }
+    })
   })
-}).catch((error: unknown) => {
-  console.error(error)
-  app.quit()
-})
+  .catch((error: unknown) => {
+    console.error(error)
+    app.quit()
+  })
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit()
